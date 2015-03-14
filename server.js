@@ -9,6 +9,9 @@ var port = process.env.PORT || 8080;
 
 var router = express.Router();
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o');
+
 router.get('/', function(req, res) {
 	res.json({ message: 'Welcome to my api!'});
 });
