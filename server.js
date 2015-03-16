@@ -24,6 +24,36 @@ router.get('/', function(req, res) {
 	res.json({ message: 'Welcome to my api!'});
 });
 
+router.route('/clients')
+	.post(function(req, res) {
+		var client = new Client();
+		client.name = req.body.name;
+		client.save(function(err) {
+			if (err)
+				res.send(err);
+
+			res.json({ message: 'Client created'});
+		});
+	});
+
+	.get(function(req, res){
+		Client.find(function(err, clients){
+			if (err)
+				res.send(err);
+
+			res.json(clients);
+		});
+	});
+
+router.route('/clients/:client_id')
+
+	.get(function(req, res){
+		Client.findById(req.params.client_id, function(err, client) {
+			if (err)
+				res.send(err);
+			res.json(client);
+		});
+	});
 
 app.use('/api', router);
 
