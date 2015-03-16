@@ -55,6 +55,22 @@ router.route('/clients/:client_id')
 		});
 	});
 
+	.put(function(req, res){
+		Client.findById(req.params.client_id, function(err, client){
+
+			if (err)
+				res.send(err);
+
+			client.name = req.body.name;
+
+			client.save(function(err){
+				if (err)
+					res.send(err);
+				res.json({message: 'Client updated'});
+			});
+		});
+	});
+
 app.use('/api', router);
 
 app.listen(port);
