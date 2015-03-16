@@ -71,6 +71,17 @@ router.route('/clients/:client_id')
 		});
 	});
 
+	.delete(function(req, res){
+		Client.remove({
+			_id: req.params.client_id
+		}, function(err, client){
+			if (err)
+				res.send(err);
+
+			res.json({ message: 'Successfully deleted'});
+		});
+	});
+
 app.use('/api', router);
 
 app.listen(port);
